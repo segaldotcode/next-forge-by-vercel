@@ -1,9 +1,14 @@
+/// <reference path="./basehub-types.d.ts" />
+import type { QueryGenqlSelection } from "basehub";
 import { basehub as basehubClient, fragmentOn } from "basehub";
 import { keys } from "./keys";
 import "./basehub.config";
 
-const token = keys().BASEHUB_TOKEN;
-const basehub = token ? basehubClient({ token }) : null;
+const { BASEHUB_TOKEN } = keys();
+
+const basehub = BASEHUB_TOKEN
+  ? basehubClient({ token: BASEHUB_TOKEN })
+  : undefined;
 
 /* -------------------------------------------------------------------------------------------------
  * Common Fragments
@@ -53,24 +58,24 @@ export type PostMeta = fragmentOn.infer<typeof postMetaFragment>;
 export type Post = fragmentOn.infer<typeof postFragment>;
 
 export const blog = {
-  postsQuery: fragmentOn("Query", {
+  postsQuery: {
     blog: {
       posts: {
         items: postMetaFragment,
       },
     },
-  }),
+  } satisfies QueryGenqlSelection,
 
-  latestPostQuery: fragmentOn("Query", {
+  latestPostQuery: {
     blog: {
       posts: {
         __args: {
-          orderBy: "_sys_createdAt__DESC",
+          orderBy: "_sys_createdAt__DESC" as const,
         },
         item: postFragment,
       },
     },
-  }),
+  } satisfies QueryGenqlSelection,
 
   postQuery: (slug: string) => ({
     blog: {
@@ -90,9 +95,13 @@ export const blog = {
       console.warn("BASEHUB_TOKEN not configured. Returning empty posts.");
       return [];
     }
-    const data = await basehub.query(blog.postsQuery);
 
-    return data.blog.posts.items;
+    try {
+      const data = await basehub.query(blog.postsQuery);
+      return data.blog.posts.items;
+    } catch {
+      return [];
+    }
   },
 
   getLatestPost: async (): Promise<Post | null> => {
@@ -100,9 +109,13 @@ export const blog = {
       console.warn("BASEHUB_TOKEN not configured. Returning null.");
       return null;
     }
-    const data = await basehub.query(blog.latestPostQuery);
 
-    return data.blog.posts.item;
+    try {
+      const data = await basehub.query(blog.latestPostQuery);
+      return data.blog.posts.item;
+    } catch {
+      return null;
+    }
   },
 
   getPost: async (slug: string): Promise<Post | null> => {
@@ -110,10 +123,14 @@ export const blog = {
       console.warn("BASEHUB_TOKEN not configured. Returning null.");
       return null;
     }
-    const query = blog.postQuery(slug);
-    const data = await basehub.query(query);
 
-    return data.blog.posts.item;
+    try {
+      const query = blog.postQuery(slug);
+      const data = await basehub.query(query);
+      return data.blog.posts.item;
+    } catch {
+      return null;
+    }
   },
 };
 
@@ -143,32 +160,50 @@ export type LegalPostMeta = fragmentOn.infer<typeof legalPostMetaFragment>;
 export type LegalPost = fragmentOn.infer<typeof legalPostFragment>;
 
 export const legal = {
-  postsQuery: fragmentOn("Query", {
+  postsMetaQuery: {
+    legalPages: {
+      items: legalPostMetaFragment,
+    },
+  } satisfies QueryGenqlSelection,
+
+  postsQuery: {
     legalPages: {
       items: legalPostFragment,
     },
-  }),
+  } satisfies QueryGenqlSelection,
 
-  latestPostQuery: fragmentOn("Query", {
+  latestPostQuery: {
     legalPages: {
       __args: {
-        orderBy: "_sys_createdAt__DESC",
+        orderBy: "_sys_createdAt__DESC" as const,
+      },
+      item: legalPostFragment,
+    },
+  } satisfies QueryGenqlSelection,
+
+  postQuery: (slug: string) => ({
+    legalPages: {
+      __args: {
+        filter: {
+          _sys_slug: { eq: slug },
+        },
       },
       item: legalPostFragment,
     },
   }),
 
-  postQuery: (slug: string) =>
-    fragmentOn("Query", {
-      legalPages: {
-        __args: {
-          filter: {
-            _sys_slug: { eq: slug },
-          },
-        },
-        item: legalPostFragment,
-      },
-    }),
+  getPostsMeta: async (): Promise<LegalPostMeta[]> => {
+    if (!basehub) {
+      return [];
+    }
+
+    try {
+      const data = await basehub.query(legal.postsMetaQuery);
+      return data.legalPages.items;
+    } catch {
+      return [];
+    }
+  },
 
   getPosts: async (): Promise<LegalPost[]> => {
     if (!basehub) {
@@ -177,9 +212,13 @@ export const legal = {
       );
       return [];
     }
-    const data = await basehub.query(legal.postsQuery);
 
-    return data.legalPages.items;
+    try {
+      const data = await basehub.query(legal.postsQuery);
+      return data.legalPages.items;
+    } catch {
+      return [];
+    }
   },
 
   getLatestPost: async (): Promise<LegalPost | null> => {
@@ -187,9 +226,13 @@ export const legal = {
       console.warn("BASEHUB_TOKEN not configured. Returning null.");
       return null;
     }
-    const data = await basehub.query(legal.latestPostQuery);
 
-    return data.legalPages.item;
+    try {
+      const data = await basehub.query(legal.latestPostQuery);
+      return data.legalPages.item;
+    } catch {
+      return null;
+    }
   },
 
   getPost: async (slug: string): Promise<LegalPost | null> => {
@@ -197,9 +240,13 @@ export const legal = {
       console.warn("BASEHUB_TOKEN not configured. Returning null.");
       return null;
     }
-    const query = legal.postQuery(slug);
-    const data = await basehub.query(query);
 
-    return data.legalPages.item;
+    try {
+      const query = legal.postQuery(slug);
+      const data = await basehub.query(query);
+      return data.legalPages.item;
+    } catch {
+      return null;
+    }
   },
 };

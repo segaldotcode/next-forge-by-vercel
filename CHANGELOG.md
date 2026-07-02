@@ -1,3 +1,88 @@
+# v6.0.2 (Fri Mar 20 2026)
+
+:tada: This release contains work from a new contributor! :tada:
+
+Thank you, Sam Gutentag ([@samgutentag](https://github.com/samgutentag)), for all your work!
+
+#### 🐛 Bug Fix
+
+- Feat/trunk integration [#735](https://github.com/vercel/next-forge/pull/735) ([@samgutentag](https://github.com/samgutentag) [@haydenbleasel](https://github.com/haydenbleasel))
+
+#### Authors: 2
+
+- Hayden Bleasel ([@haydenbleasel](https://github.com/haydenbleasel))
+- Sam Gutentag ([@samgutentag](https://github.com/samgutentag))
+
+---
+
+# v6.0.1 (Mon Mar 16 2026)
+
+:tada: This release contains work from new contributors! :tada:
+
+Thanks for all your work!
+
+:heart: Kaylee ([@KayleeWilliams](https://github.com/KayleeWilliams))
+
+:heart: James Singleton ([@JamesSingleton](https://github.com/JamesSingleton))
+
+#### 🐛 Bug Fix
+
+- Add c15t addon [#728](https://github.com/vercel/next-forge/pull/728) ([@KayleeWilliams](https://github.com/KayleeWilliams))
+- chore(docs): update and rename friendlier-words.mdx to joyful.mdx [#731](https://github.com/vercel/next-forge/pull/731) ([@JamesSingleton](https://github.com/JamesSingleton))
+
+#### Authors: 2
+
+- James Singleton ([@JamesSingleton](https://github.com/JamesSingleton))
+- Kaylee ([@KayleeWilliams](https://github.com/KayleeWilliams))
+
+---
+
+# v6.0.0 (Fri Mar 13 2026)
+
+:tada: This release contains work from new contributors! :tada:
+
+Thanks for all your work!
+
+:heart: Travis Butler ([@dexsnake](https://github.com/dexsnake))
+
+:heart: Rich Haines ([@molebox](https://github.com/molebox))
+
+#### 💥 Breaking Change
+
+- V6 [#688](https://github.com/vercel/next-forge/pull/688) ([@haydenbleasel](https://github.com/haydenbleasel))
+
+#### 🐛 Bug Fix
+
+- fix(docs): use /docs prefix for Supabase Auth migration links in data… [#684](https://github.com/vercel/next-forge/pull/684) ([@dexsnake](https://github.com/dexsnake))
+- Add sitemap.md route [#687](https://github.com/vercel/next-forge/pull/687) ([@molebox](https://github.com/molebox))
+- Fix React Server Components CVE vulnerabilities [#676](https://github.com/vercel/next-forge/pull/676) ([@vercel[bot]](https://github.com/vercel[bot]) [@haydenbleasel](https://github.com/haydenbleasel))
+- Fix React Server Components CVE vulnerabilities [#675](https://github.com/vercel/next-forge/pull/675) ([@vercel[bot]](https://github.com/vercel[bot]) [@haydenbleasel](https://github.com/haydenbleasel))
+
+#### ⚠️ Pushed to `main`
+
+- Remove sed step, setup-node handles OIDC exchange ([@haydenbleasel](https://github.com/haydenbleasel))
+- Add registry-url back, update npm, strip authToken for OIDC ([@haydenbleasel](https://github.com/haydenbleasel))
+- Remove registry-url to let npm use OIDC directly ([@haydenbleasel](https://github.com/haydenbleasel))
+- Normalize repository URL format ([@haydenbleasel](https://github.com/haydenbleasel))
+- Add publishConfig for npm OIDC provenance ([@haydenbleasel](https://github.com/haydenbleasel))
+- Fix release CI for npm OIDC trusted publishing ([@haydenbleasel](https://github.com/haydenbleasel))
+- Update release.yml ([@haydenbleasel](https://github.com/haydenbleasel))
+- Update index.ts ([@haydenbleasel](https://github.com/haydenbleasel))
+
+#### 🔩 Dependency Updates
+
+- Bump actions/cache from 4 to 5 [#681](https://github.com/vercel/next-forge/pull/681) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 5
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@vercel[bot]](https://github.com/vercel[bot])
+- Hayden Bleasel ([@haydenbleasel](https://github.com/haydenbleasel))
+- Rich Haines ([@molebox](https://github.com/molebox))
+- Travis Butler ([@dexsnake](https://github.com/dexsnake))
+
+---
+
 # v5.3.2 (Sat Dec 06 2025)
 
 #### ⚠️ Pushed to `main`

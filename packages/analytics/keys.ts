@@ -3,13 +3,14 @@ import { z } from "zod";
 
 export const keys = () =>
   createEnv({
+    skipValidation: process.env.SKIP_ENV_VALIDATION === "true",
     client: {
       NEXT_PUBLIC_POSTHOG_KEY: z
         .string()
         .startsWith("phc_")
         .optional()
         .or(z.literal("")),
-      NEXT_PUBLIC_POSTHOG_HOST: z.string().url().optional().or(z.literal("")),
+      NEXT_PUBLIC_POSTHOG_HOST: z.url().optional().or(z.literal("")),
       NEXT_PUBLIC_GA_MEASUREMENT_ID: z
         .string()
         .startsWith("G-")
