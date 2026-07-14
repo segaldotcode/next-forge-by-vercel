@@ -4,11 +4,13 @@
     "@repo/cms/typescript-config.json"
   ],
   "compilerOptions": {
-    "ignoreDeprecations": "5.0",
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
-      "@repo/*": ["../../packages/*"]
+      "@/*": [
+        "./*"
+      ],
+      "@repo/*": [
+        "../../packages/*"
+      ]
     }
   },
   "include": [
